@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>OrderSys</display-name>
+
+
+	<filter>
+		<filter-name>requestContext</filter-name>
+		<filter-class>com.chinasofti.web.common.filters.HttpRequestContextFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>requestContext</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+
+	<filter>
+		<filter-name>adminFilter</filter-name>
+		<filter-class>com.chinasofti.ordersys.filters.AdminFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>adminFilter</filter-name>
+		<url-pattern>/pages/admin/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>kitchenFilter</filter-name>
+		<filter-class>com.chinasofti.ordersys.filters.KitchenFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>kitchenFilter</filter-name>
+		<url-pattern>/pages/kitchen/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+
+	<filter>
+		<filter-name>waiterFilter</filter-name>
+		<filter-class>com.chinasofti.ordersys.filters.WaiterFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>waiterFilter</filter-name>
+		<url-pattern>/pages/waiters/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>userFilter</filter-name>
+		<filter-class>com.chinasofti.ordersys.filters.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>userFilter</filter-name>
+		<url-pattern>/pages/users/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>com.chinasofti.web.common.filters.CharEncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+
+		<servlet-name>SaveCodeServlet</servlet-name>
+		<servlet-class>com.chinasofti.web.servlets.common.SaveCodeServlet</servlet-class>
+	</servlet>
+	<servlet>
+
+		<servlet-name>InitSysServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.common.InitSysServlet</servlet-class>
+		<init-param>
+			<param-name>sysname</param-name>
+			<param-value>中软国际-餐厅到店点餐系统</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>CheckSaveCodeServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.CheckSaveCodeServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserLoginServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.UserLoginServlet</servlet-class>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>stateServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.common.GetImgUploadStateServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>upimgServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.common.PreviewImageUploadServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>AddUserServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.AddUserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>CheckAddUserServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.CheckAddUserServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>GetUserByPageServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.GetUserByPageServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>DeleteUserServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.DeleteUserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ToAddUserServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToAddUserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ToAdminMainServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToAdminMainServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ToUserAdminServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToUserAdminServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ToModifyUserServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToModifyUserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>AdminModifyUserServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.AdminModifyUserServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>GetOnlineWaitersServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.GetOnlineWaitersServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ToOnlineWaitersServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToOnlineWaitersServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>LoginOutServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.LoginOutServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToDishesAdminServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToDishesAdminServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetDishesByPageServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.GetDishesByPageServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToModifyDishesServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToModifyDishesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DeleteDishesServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.DeleteDishesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToAddDishesServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToAddDishesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CheckAddDishesServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.CheckAddDishesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AddDishesServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.AddDishesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AdminModifyDishesServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.AdminModifyDishesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToOperateDataServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToOperateDataServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ModifyMyPassServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.ModifyMyPassServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CheckUserPassServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.CheckUserPassServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ModifyMyIMFServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.login.ModifyMyIMFServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>OperateSearchServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.OperateSearchServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToOperateDataShowServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToOperateDataShowServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TopRecommendServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.TopRecommendServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetRTPlayServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.GetRTPlayServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SendBordServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.SendBordServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetRTBordServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.GetRTBordServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToWaiterMainServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.ToWaiterMainServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToDishesCheckoutServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.ToDishesCheckoutServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToKitchenMainServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.kitchen.ToKitchenMainServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetOrderByPageServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.kitchen.GetOrderByPageServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToModifyOrderServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.kitchen.ToModifyOrderServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SubmitDishesServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.SubmitDishesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SendOrderMsgServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.kitchen.SendOrderMsgServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetOrderMsgServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.GetOrderMsgServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CheckoutServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.CheckoutServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SendOrderMsg2Servlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.SendOrderMsg2Servlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetOrderMsg2Servlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.kitchen.GetOrderMsg2Servlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DeleteOrderServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.DeleteOrderServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CheckoutOrderServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.CheckoutOrderServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CheckoutDishesServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.CheckoutDishesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>getCheckoutServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.getCheckoutServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SendOrderMsgToAdminServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.SendOrderMsgToAdminServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToModifyMyPassForKitchenServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.kitchen.ToModifyMyPassForKitchenServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ModifyMyIMFForKitchenServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.kitchen.ModifyMyIMFForKitchenServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ModifyMyPassForWaiterServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.ModifyMyPassForWaiterServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToModifyMyPassServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.waiter.ToModifyMyPassServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ToOrderDetailServlet</servlet-name>
+		<servlet-class>com.chinasofti.ordersys.servlets.admin.ToOrderDetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ToOrderDetailServlet</servlet-name>
+		<url-pattern>/toorderdetail.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToModifyMyPassServlet</servlet-name>
+		<url-pattern>/modifymyinfoforwaiter.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyMyPassForWaiterServlet</servlet-name>
+		<url-pattern>/tomodifymypassforwaiter.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyMyIMFForKitchenServlet</servlet-name>
+		<url-pattern>/modifymyinfoforkitchen.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToModifyMyPassForKitchenServlet</servlet-name>
+		<url-pattern>/tomodifymypassforkitchen.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SendOrderMsgToAdminServlet</servlet-name>
+		<url-pattern>/sendordermsgtoadmin.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>getCheckoutServlet</servlet-name>
+		<url-pattern>/getcheckoutd.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CheckoutDishesServlet</servlet-name>
+		<url-pattern>/deletedishesorder.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CheckoutOrderServlet</servlet-name>
+		<url-pattern>/checkoutorder.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteOrderServlet</servlet-name>
+		<url-pattern>/changeorder.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetOrderMsg2Servlet</servlet-name>
+		<url-pattern>/getordermsg2.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SendOrderMsg2Servlet</servlet-name>
+		<url-pattern>/sendordermsg2.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CheckoutServlet</servlet-name>
+		<url-pattern>/checkout.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetOrderMsgServlet</servlet-name>
+		<url-pattern>/getordermsg.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SendOrderMsgServlet</servlet-name>
+		<url-pattern>/sendordermsg.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SubmitDishesServlet</servlet-name>
+		<url-pattern>/submitdishes.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToModifyOrderServlet</servlet-name>
+		<url-pattern>/tomodifyorder.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetOrderByPageServlet</servlet-name>
+		<url-pattern>/getorderbypage.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToKitchenMainServlet</servlet-name>
+		<url-pattern>/tokitchenmain.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToDishesCheckoutServlet</servlet-name>
+		<url-pattern>/todishescheckout.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToWaiterMainServlet</servlet-name>
+		<url-pattern>/towaitermain.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetRTBordServlet</servlet-name>
+		<url-pattern>/getrtbord.order</url-pattern>
+	</servlet-mapping>
+			
+	<servlet-mapping>
+		<servlet-name>SendBordServlet</servlet-name>
+		<url-pattern>/sendbord.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetRTPlayServlet</servlet-name>
+		<url-pattern>/getrtplay.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TopRecommendServlet</servlet-name>
+		<url-pattern>/toprecommend.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToOperateDataShowServlet</servlet-name>
+		<url-pattern>/tooperatedatashow.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OperateSearchServlet</servlet-name>
+		<url-pattern>/operateSearch.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyMyIMFServlet</servlet-name>
+		<url-pattern>/modifymyinfo.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CheckUserPassServlet</servlet-name>
+		<url-pattern>/checkuserpass.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyMyPassServlet</servlet-name>
+		<url-pattern>/tomodifymypass.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToOperateDataServlet</servlet-name>
+		<url-pattern>/tooperatedata.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminModifyDishesServlet</servlet-name>
+		<url-pattern>/adminmodifydishes.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddDishesServlet</servlet-name>
+		<url-pattern>/adddishes.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CheckAddDishesServlet</servlet-name>
+		<url-pattern>/checkdishes.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToAddDishesServlet</servlet-name>
+		<url-pattern>/toadddishes.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteDishesServlet</servlet-name>
+		<url-pattern>/deletedishes.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToModifyDishesServlet</servlet-name>
+		<url-pattern>/tomodifydishes.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetDishesByPageServlet</servlet-name>
+		<url-pattern>/getdishesbypage.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToDishesAdminServlet</servlet-name>
+		<url-pattern>/todishesadmin.order</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>upimgServlet</servlet-name>
+		<url-pattern>/upimg.order</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>stateServlet</servlet-name>
+		<url-pattern>/state.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SaveCodeServlet</servlet-name>
+		<url-pattern>/savecode.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CheckSaveCodeServlet</servlet-name>
+		<url-pattern>/checkcode.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserLoginServlet</servlet-name>
+		<url-pattern>/login.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddUserServlet</servlet-name>
+		<url-pattern>/adduser.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CheckAddUserServlet</servlet-name>
+		<url-pattern>/checkuser.order</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>GetUserByPageServlet</servlet-name>
+		<url-pattern>/getuserbypage.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteUserServlet</servlet-name>
+		<url-pattern>/deleteuser.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToAddUserServlet</servlet-name>
+		<url-pattern>/toadd.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToAdminMainServlet</servlet-name>
+		<url-pattern>/toadminmain.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ToUserAdminServlet</servlet-name>
+		<url-pattern>/touseradmin.order</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ToModifyUserServlet</servlet-name>
+		<url-pattern>/tomodifyuser.order</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminModifyUserServlet</servlet-name>
+		<url-pattern>/adminmodifyuser.order</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>GetOnlineWaitersServlet</servlet-name>
+		<url-pattern>/getonlinewaiters.order</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ToOnlineWaitersServlet</servlet-name>
+		<url-pattern>/toonlinewaiters.order</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>LoginOutServlet</servlet-name>
+		<url-pattern>/logout.order</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>com.chinasofti.ordersys.listeners.OrderSysListener</listener-class>
+	</listener>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

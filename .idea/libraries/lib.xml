@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/web_war_exploded/WEB-INF/lib/mysql_connector_java_5.1.34_bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/web_war_exploded/WEB-INF/lib/standard.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/web_war_exploded/WEB-INF/lib/jstl.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
